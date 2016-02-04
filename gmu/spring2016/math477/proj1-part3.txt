@@ -1,0 +1,174 @@
+% Project 1: Kinematics of the Stewart platform
+% MATH 447, George Mason University
+% Professor Sauer
+% Stephen Collins
+% 29 January 2016
+%
+% Solves the forward kinematics problem for a planar Stewart platform by
+% computing the valid poses of the platform given its physical constants
+% and the current length of its struts as arguments. See reference below
+% for further information on variable labels and function derivation.
+%
+% Arguments:
+%   x1, x2, y2      Coordinates for platform strut anchor points
+%   L2, L3          Platform side lengths
+%   gamma           The angle of vertex u1
+%   p1, p2, p3      Current length of the platform's prismatic joints
+%   showPlot        (Optional) Set to false to disable plotting data
+%
+% Returns:
+%   A matrix ranging from 0 X 3 to 6 X 3 containing data for each valid
+%   pose arranged [ theta  x  y ].
+%
+% Reference:
+%   Sauer, T., & Faculty Author Collection. (2012). Reality check 1: 
+%       kinematics of the Stewart platform. In Numerical analysis (2nd ed.)
+%       (pp. 67-69). Boston: Pearson.
+function pose = planarfkp(x1, x2, y2, L2, L3, gamma, p1, p2, p3, showPlot)
+if nargin < 9
+    error('MATLAB:pfkp',['Too few arguments. Usage:\n' ...
+          '\tplanarfkp(x1, x2, y2, L2, L3, gamma, p1, p2, p3, plot)\n' ...
+          '\tplanarfkp(x1, x2, y2, L2, L3, gamma, p1, p2, p3)\n']);
+end
+if nargin == 9
+    showPlot = true;
+end
+
+pose = zeros(0);        % Matrix containing all valid poses, if any
+rt = 0;                 % Tracks the number of roots (poses)
+tol = 1e-13;            % The error tolerance when finding the root
+x0 = -pi : 0.05 : pi;   % Sample of x values to analyze and plot f(theta)
+y0 = f(x0);             % f(theta) function output
+
+% Roots are bracketed by locating changes in sign in the function output.
+% This interval is analyzed using a local implementation of the bisection
+% method and the x, y coordinates calculated from the approximate root.
+for i = 1 : length(y0) - 1
+    if sign(y0(i)) ~=  sign(y0(i + 1))
+        rt = rt + 1;
+        pose(rt, 1) = bisect(@f, x0(i), x0(i + 1), tol);
+        [pose(rt, 2), pose(rt, 3)] = cmptxy(pose(rt, 1));
+    end
+end
+
+% Plots the data if that option is enabled (it is by default)
+if showPlot
+    plottheta(x0, y0);
+end
+if showPlot && rt > 0
+    plotposes(pose, rt);
+end
+
+    % The roots of this function correspond to valid platform poses
+    function out = f(theta)
+    [N1, N2, D] = cmptnd(theta);
+        
+    out = N1.^2 + N2.^2 - p1^2*D.^2; 
+    end
+
+    % Returns the x,y coordinates associated with a particular theta
+    function [x, y] = cmptxy(theta)
+    [N1, N2, D] = cmptnd(theta);
+        
+    x = N1 / D;
+    y = N2 / D;
+    end
+   
+    % Computes the variables used by both the cmptxy and f functions
+    function [N1, N2, D] = cmptnd(theta)
+    A2 = L3*cos(theta) - x1;
+    B2 = L3*sin(theta);
+    A3 = L2*(cos(theta)*cos(gamma) - sin(theta)*sin(gamma)) - x2;
+    B3 = L2*(cos(theta)*sin(gamma) + sin(theta)*cos(gamma)) - y2;
+
+    N1 = B3.*(p2^2-p1^2-A2.^2-B2.^2) - B2.*(p3^2-p1^2-A3.^2-B3.^2);
+    N2 = -A3.*(p2^2-p1^2-A2.^2-B2.^2) + A2.*(p3^2-p1^2-A3.^2-B3.^2);
+    D = 2*(A2.*B3 - B2.*A3);
+    end
+   
+    % Plots f(theta) from -pi to pi 
+    function plottheta(x0, y0)
+    figure;
+    plot(x0, y0);
+    title('f(\theta) from -\pi to \pi', 'FontSize', 12);
+    grid on;
+    end
+   
+    % Plots every valid pose in a separate figure with synchronized axes.
+    % First the plotting data for each platform is determined, then the
+    % appropriate min/max values are selected from this data for consistent
+    % plot axes for easy comparison. (u1, v1), (u2, v2), (u3, v3) are the
+    % vertices of the platform with (u1, v1) being anchored to the origin. 
+    function plotposes(pose, rt)
+    u1 = zeros(rt); u2 = zeros(rt); u3 = zeros(rt);
+    v1 = zeros(rt); v2 = zeros(rt); v3 = zeros(rt);
+        
+    for n = 1 : rt
+        u1(n) = pose(n, 2);
+        u2(n) = u1(n) + L3*cos(pose(n, 1));
+        u3(n) = u1(n) + L2*cos(pose(n, 1) + gamma);
+        v1(n) = pose(n, 3);
+        v2(n) = v1(n) + L3*sin(pose(n, 1));
+        v3(n) = v1(n) + L2*sin(pose(n, 1) + gamma);
+        
+        % Added to confirm strut lengths match expected values
+        p1A = sqrt(u1(n)^2 + v1(n)^2);
+        p2A = sqrt((x1 - u2(n))^2 + v2(n)^2);
+        p3A = sqrt((x2 - u3(n))^2 + (y2 - v3(n))^2);
+        str = sprintf('r%d\tp1 = %.4f\tp2 = %.4f\tp3 = %.4f\n', n, p1A, p2A, p3A);
+        disp(str);
+    end
+        
+    xMin = min([u1 u2 u3]); xMin = min([xMin x1 x2]);
+    xMax = max([u1 u2 u3]); xMax = max([xMax x1 x2]);
+    yMin = min([v1 v2 v3]); yMin = min([yMin y2]);
+    yMax = max([v1 v2 v3]); yMax = max([yMax y2]);
+        
+    for n = 1 : rt
+        figure;
+        plot([u1(n) u2(n) u3(n) u1(n)],[v1(n) v2(n) v3(n) v1(n)], 'r');
+        hold on;
+        plot([0 x1 x2], [0 0 y2], 'bo');
+        plot([0 u1(n)], [0 v1(n)], 'b');
+        plot([x1 u2(n)], [0 v2(n)], 'b');
+        plot([x2 u3(n)], [y2 v3(n)], 'b');
+        axis([xMin xMax yMin yMax]);
+        grid on;
+        str = sprintf('\\theta = %.4f    (x,y) = (%.4f, %.4f)',pose(n,:));
+        title(str, 'FontSize', 12);
+    end
+    end
+end
+
+% Bisection method (Sightly modified version of textbook's function)
+% Computes approximate solution of f(x)=0
+% Arguments:
+%   f       inline function f 
+%   a,b     [a,b] such that f(a)f(b) < 0
+% Returns:
+%   Approximate root xc
+function xc = bisect(f,a,b,tol)
+fa = f(a);
+
+if sign(fa) * sign(f(b)) >= 0
+    error('f(a)f(b)<0 not satisfied!')
+end
+
+while (b - a) / 2 > tol
+    c = (a + b) / 2;
+    fc = f(c);
+
+    if fc == 0                  % c is a solution, done
+        break
+    end
+    if sign(fc) * sign(fa)<0    % a and c make the new interval
+        b = c;
+    else                        % c and b make the new interval
+        a = c; fa = fc;
+    end
+end
+
+xc = (a + b) / 2;               % new midpoint is best estimate
+end
+
+diary off

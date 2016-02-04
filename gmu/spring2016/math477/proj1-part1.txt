@@ -1,0 +1,6 @@
+x0 = -pi : 0.05 : pi; % Sample of x values to analyze and and plot f(theta)
+y0=f(x0);	      % f(theta) function output
+figure;
+plot(x0, y0);
+tiltle('f(\theta) from -\pi to \pi','FontSize',12);
+grid on;

@@ -112,6 +112,9 @@
             font-size: 14px;
             font-family: monospace;
         }
+        section>p {
+          text-align: justify;
+        }
     </style>
 
     <!--[if lt IE 9]>
@@ -129,19 +132,64 @@
           <li><a href="/">Home</a></li>
           <li><a href="#">gmu</a></li>
           <li><a href="#">Spring 2016</a></li>
-          <li><a href="/gmu/spring2016/math477/" class="active">MATH 477</a></li>
+          <li><a href="/gmu/spring2016/math477/">MATH 477</a></li>
+          <li><a class="active">Project 1</a></li>
         </ul>
     </div>
+    <h3 class="sectiontitle">MATH 477 Project 1</h3>
 
 
     <div class="row">
         <section id="intro">
-            <h3 class="sectiontitle">MATH 477</h3>
-            <p>This is class is project based. See the following list.</p>
-            <ul>
-              <li><a href="proj0.html">Project 0</a></li>
-              <li><a href="proj1.html">Project 1</a> (Kinematics of the Stewart Platform)</li>
-            </ul>
+          <p>For <a href="http://math.gmu.edu/~tsauer/class/447/proj/447proj1.html">Project 1</a>, we chose to solve the Kinematics of the Stewart Platform. From the project page, we were asked to complete the following:</p>
+          <p class="col-md-10">"Solve the problems presented in <a href="http://math.gmu.edu/~tsauer/class/447/proj/rc1.pdf">Reality Check 1</a> on page 67-69 of the text. Carry out Parts 1 - 6. Exception: in Part 5, use any value of \(p_2\) except 7. But be sure there are six poses -- you'll have to stay fairly close to 7."</p>
+        </section>
+    </div>
+    <div class="row">
+        <section id="description">
+          <p>The Stewart platform is a robot with six struts. Each strut can change its length (giving the robot six degrees-of-freedom). The overall goal of this project is to write a MATLAB function to calculate \((x, y)\) and \(\theta\) given some \(p_1\), \(p_2\), and \(p_3\) for the following figure.</p>
+        </section>
+    </div>
+    <div class="row">
+        <h3 class="sectiontitle">Part 1</h3>
+        <section>
+          <p>For part 1, we were tasked with writing <a href="proj1-part1.txt">a MATLAB function</a> for \(f(\theta)\) using the parameters given. Once we accomplished this, we had a to find a root. We knew that a root would exist within \((-\frac{\pi}{4},\frac{\pi}{4})\). This yielded the root \(-4.5475 \times 10^{-13}\) which was close to 0.</p>
+        </section>
+    </div>
+    <div class="row">
+        <h3 class="sectiontitle">Part 2</h3>
+        <section>
+          <p>After finding this root, we needed to graph our function on \(-\pi\) to \(\pi\) to verify that we found a 0.</p>
+          <p><img src="proj1-part2.png" /></p>
+        </section>
+    </div>
+    <div class="row">
+        <h3 class="sectiontitle">Part 3</h3>
+        <section>
+          <p>Solving the forward kinematics of the Stewart Platform yields different poses based on our initial parameters. There should be a pose for every solution of \(f(\theta)\). For this excercise and the following excercises, we wrote a MATLAB function, <a href="proj1-part3.txt">planarfkp</a>, to plot the poses.</p>
+          <p><img src="proj1-part3-pose1.png" /></p>
+          <p><img src="proj1-part3-pose2.png" /></p>
+        </section>
+    </div>
+    <div class="row">
+        <h3 class="sectiontitle">Part 4</h3>
+        <section>
+          <p>
+          </p>
+        </section>
+    </div>
+    <div class="row">
+        <h3 class="sectiontitle">Part 5</h3>
+        <section>
+          <p>
+          </p>
+        </section>
+    </div>
+    <div class="row">
+        <h3 class="sectiontitle">Part 6</h3>
+        <section>
+          <p>
+          </p>
         </section>
     </div>
 
