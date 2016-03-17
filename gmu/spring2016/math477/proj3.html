@@ -112,6 +112,12 @@
             font-size: 14px;
             font-family: monospace;
         }
+        section>p {
+          text-align: justify;
+        }
+        p>img {
+          width: 100%;
+        }
     </style>
 
     <!--[if lt IE 9]>
@@ -129,21 +135,51 @@
           <li><a href="/">Home</a></li>
           <li><a href="#">gmu</a></li>
           <li><a href="#">Spring 2016</a></li>
-          <li><a href="/gmu/spring2016/math477/" class="active">MATH 477</a></li>
+          <li><a href="/gmu/spring2016/math477/">MATH 477</a></li>
+          <li><a class="active">Project 3</a></li>
         </ul>
     </div>
+    <h3 class="sectiontitle">Celestial Mechanics</h3>
 
 
     <div class="row">
         <section id="intro">
-            <h3 class="sectiontitle">MATH 477</h3>
-            <p>This is class is project based. See the following list.</p>
-            <ul>
-              <li><a href="proj0.html">Project 0</a></li>
-              <li><a href="http://sdcollins.github.io/project1/">Project 1</a> (Kinematics of the Stewart Platform)</li>
-              <li><a href="proj2.html">Project 2</a> (GPS, Conditioning, and Nonlinear Least Squares)</li>
-              <li><a href="proj3.html">Project 3</a> (Celestial Mechanics)</li>
-            </ul>
+          <p>For <a href="http://math.gmu.edu/~tsauer/class/447/proj/447proj3.html">Project 3</a>, we chose to simulate <a href="http://math.gmu.edu/~tsauer/class/447/proj/chap6.pdf">orbital mechanics</a>.</p>
+          <p>In order to begin simulating orbital mechanics, we need to review the <a href="http://hyperphysics.phy-astr.gsu.edu/hbase/grav.html#grav">Newton's Law of Gravitation</a> (which is <a href="http://www.relativitycalculator.com/Newton_Universal_Gravity_Law.shtml">derived</a> from <a href="http://hyperphysics.phy-astr.gsu.edu/hbase/newt.html#fma<F37>">Newton's Second Law</a>). Newton's Law of Gravitation, $$F=\frac{gm_1m_2}{r^2}$$ uses the Inverse Square Law to describe how a body of mass \(m_1\) affects the force \(F\) on another body of mass on another body of mass \(m_2\). <img src="NewtonsLawOfUniversalGravitation.svg" class="img-responsive" alt="Newton's Law of Gravitation" /></p>
+          <video controls>
+            <source src="one_body.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </section>
+    </div>
+    <div class="row">
+        <h3 class="sectiontitle">The Two-Body Problem</h3>
+        <section>
+          <p>We have shown a body orbiting another stationary body. What if the second body was not stationary? We can re-formulate this as two one-body problems.</p>
+          <p>Let \((x_1, y_1)\) be the coordinates for \(m_1\) and \((x_2, y_2)\) be the coordinates of \(m_2\). Given these two coordinates, we define</p>
+\begin{align}
+\Delta x &= x_1 - x_2\\
+\Delta y &= y_1 - y_2
+\end{align}
+<p>We can define the distance between the two bodies \(r\) to be</p>
+\begin{align}
+r &= \sqrt{\Delta x^2 + \Delta y^2}
+\end{align}
+          <p>So, the unit vector for the body \(m_1\) is now, $$\left(\frac{-\Delta x^2}{r},\frac{\Delta y^2}{r}\right)$$ and the unit vector for the body \(m_2\) is now, $$\left(\frac{\Delta x^2}{r},\frac{\Delta y^2}{r}\right)$$</p>
+          <p>Therefore, the force on the objects should be $$F \cdot \left(\frac{-\Delta x}{r},\frac{-\Delta y}{r}\right)$$ and $$F \cdot \left(\frac{\Delta x}{r},\frac{\Delta y}{r}\right)$$ with $$F=\frac{G m_1 m_2}{r^2}$$</p>
+          <video controls>
+            <source src="question_10a.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <video controls>
+            <source src="question_10b.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </section>
+    </div>
+    <div class="row">
+        <h3 class="sectiontitle">Part 2</h3>
+        <section>
         </section>
     </div>
 
