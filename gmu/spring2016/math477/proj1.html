@@ -115,6 +115,9 @@
         section>p {
           text-align: justify;
         }
+        p>img {
+          width: 100%;
+        }
     </style>
 
     <!--[if lt IE 9]>
@@ -166,7 +169,7 @@
     <div class="row">
         <h3 class="sectiontitle">Part 3</h3>
         <section>
-          <p>Solving the forward kinematics of the Stewart Platform yields different poses based on our initial parameters. There should be a pose for every solution of \(f(\theta)\). For this excercise and the following excercises, we wrote a MATLAB function, <a href="proj1-part3.txt">planarfkp</a>, to plot the poses.</p>
+          <p>Solving the forward kinematics of the Stewart Platform yields different poses based on our initial parameters. There should be a pose for every solution of \(f(\theta)\). For this excercise and the following excercises, we wrote a MATLAB function, <a href="proj1-part3.txt"><tt>planarfkp</tt></a>, to plot the poses.</p>
           <p><img src="proj1-part3-pose1.png" /></p>
           <p><img src="proj1-part3-pose2.png" /></p>
         </section>
@@ -174,14 +177,16 @@
     <div class="row">
         <h3 class="sectiontitle">Part 4</h3>
         <section>
-          <p>
-          </p>
+          <p>The <tt>planarfkp</tt> function we wrote earlier plots \(f(\theta)\) (shown below) and found roots using the bisection method. Once a \(\theta\) was found for the given parameters, it calculates the remainging points and plots them as well.</p>
+          <p><img src="proj1-part4-plot.png" /></p>
+          <p>The following 4 poses were found.</p>
+          <p><img src="proj1-part4-poses.png" /></p>
         </section>
     </div>
     <div class="row">
         <h3 class="sectiontitle">Part 5</h3>
         <section>
-          <p>
+          <p>Part 5 is identical to the previous part, with an exception. We needed to choose a \(p_2\) close to (but not equal to) 7. We chose \(\)
           </p>
         </section>
     </div>

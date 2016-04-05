@@ -136,64 +136,32 @@
           <li><a href="#">gmu</a></li>
           <li><a href="#">Spring 2016</a></li>
           <li><a href="/gmu/spring2016/math477/">MATH 477</a></li>
-          <li><a class="active">Project 2</a></li>
+          <li><a class="active">Project 4</a></li>
         </ul>
     </div>
-    <h3 class="sectiontitle">GPS, Conditioning, and Nonlinear Least Squares</h3>
+    <h3 class="sectiontitle">The Brusselator Model</h3>
 
 
     <div class="row">
         <section id="intro">
-          <p>For <a href="http://math.gmu.edu/~tsauer/class/447/proj/447proj2.html">Project 2</a>, add something useful here.</p>
+          <p>For <a href="http://math.gmu.edu/~tsauer/class/447/proj/447proj4.html">Project 4</a>, we chose to simulate <a href="http://math.gmu.edu/~tsauer/class/447/proj/chap8.pdf">Brusselator model</a>. The Brusselator (a portmanteau of Brussels and oscillator) is an example of <em>Turing instability</em>. In 1952, Alan Turing published his landmark paper, "<a href="http://www.dna.caltech.edu/courses/cs191/paperscs191/turing.pdf">The Chemical Basis of Morphogenesis</a>". Alan Turing systems consisting of chemical substances (which were called <em>morphogens</em>) to develop an understanding of topics such as skin pigmentation. These morphogens diffused through skin tissue (moving from regions of greater concentration to lower concentration) and reacted together. He modeled these as reaction diffusion equations, and he found that some patterns from nature appeared in what were homogenous, uniform states. These <em>Turing patterns</em> as they came to be called took on shapes such as stripes, spots, spirals, and hexagons.</p>
+          <p>
         </section>
     </div>
     <div class="row">
-        <h3 class="sectiontitle">Part 1</h3>
         <section>
-          <p>For part 1, we were asked to solve the following equations using the Multivariate Newtons method.</p>
-          \begin{align}
-          (x-A_1)^2+(y-B_1)^2+(z-C_1)^2&=[c(t_1-d)]^2\\
-          (x-A_2)^2+(y-B_2)^2+(z-C_2)^2&=[c(t_2-d)]^2\\
-          (x-A_3)^2+(y-B_3)^2+(z-C_3)^2&=[c(t_3-d)]^2\\
-          (x-A_4)^2+(y-B_4)^2+(z-C_4)^2&=[c(t_4-d)]^2
-          \end{align}
+          <h3 class="sectiontitle">Pattern Formations in the Brusselator</h3>
+          <p>We began by applying the Backward Difference Method with Newton's iteration to the Brusselator equation with homogenous Neumann boundary conditions on the square \([0, 40] \times [0, 40]\)</p>
+          <p>The following images show the contour plots for solutions of \(p(x,y)\) at \(t=2000\) with the parameters \(D_p=1\), \(D_q=8\), \(C=4.5\), and \(K=7,8,\ldots,12\).
         </section>
     </div>
     <div class="row">
-        <h3 class="sectiontitle">Part 2</h3>
         <section>
-          <p>For part 2, we used the following equations.</p>
-          \begin{align}
-          (x-A_1)^2+(y-B_1)^2+(z-C_1)^2&=[c(t_1-d)]^2\\
-          (x-A_2)^2+(y-B_2)^2+(z-C_2)^2&=[c(t_2-d)]^2\\
-          (x-A_3)^2+(y-B_3)^2+(z-C_3)^2&=[c(t_3-d)]^2\\
-          (x-A_4)^2+(y-B_4)^2+(z-C_4)^2&=[c(t_4-d)]^2
-          \end{align}
-          <p><a role="button" data-toggle="collapse" href="#collapse1" aria-expanded="false" aria-controls="collapse1">Subtracting the last three equations from the first equation</a> yields three linear equations in the form $$x \vec{u}_x + y \vec{u}_y + z \vec{u}_z + d \vec{u}_d + \vec{w} = 0$$</p>
-          <div class="collapse" id="collapse1">
-          <p>If we multiply out our first equation $$(x-A_1)^2+(y-B_1)^2+(z-C_1)^2=c^2(t_1-d)^2$$ it should yield $$x^2-2A_1x+A_1^2+y^2-2B_1y+B_1^2+z^2-2C_1z+C_1^2=c^2 t_1^2 d + c^2 d^2$$</p>
-          <p>If we do the same thing with the second equation and subtract it from the first, yields $$(2A_2-2A_1)x+(2B_2-2B_1)y+(2C_2-2C_1)z = c^2 (t_1-t_2) + (2 c^2 t_2 - 2 c^2 t_1) d$$</p>
-          <p>Now, we rearrange this equationsi
-          $$0 = (2A_2-2A_1)x+(2B_2-2B_1)y+(2C_2-2C_1)z + (2 c^2 t_1 - 2 c^2 t_2) + c^2(t_2 - t_1) d $$
-          </p>
-          <p>Subtracting equations 3 and 4 will result in equations in the same form as the above equation (but the subscripts will change):</p>
-          \begin{align}
-          0 &= (2A_3-2A_1)x+(2B_3-2B_1)y+(2C_3-2C_1)z + (2 c^2 t_1 - 2 c^2 t_3) + c^2(t_3 - t_1) d\\
-          0 &= (2A_4-2A_1)x+(2B_4-2B_1)y+(2C_4-2C_1)z + (2 c^2 t_1 - 2 c^2 t_4) + c^2(t_4 - t_1) d
-          \end{align}
-          </div>
-          <p>We can then establish a formula for \(x\) in terms of \(d\) from $$0=\det{\left[\vec{u}_y | \vec{u}_z | x \vec{u}_x + y \vec{u}_y + z \vec{u}_z + d \vec{u}_d + \vec{w}\right]}$$</p>
-          <p><a role="button" data-toggle="collapse" href="#collapse1" aria-expanded="false" aria-controls="collapse1">Our earlier computations</a> gave us the following vector components</p>
-          \begin{align}
-          \vec{u}_x &= 2 \begin{pmatrix}A_2-A_1\\A_3-A_1\\A_4-A_1\end{pmatrix}\\
-          \vec{u}_y &= 2 \begin{pmatrix}B_2-B_1\\B_3-B_1\\B_4-B_1\end{pmatrix}\\
-          \vec{u}_z &= 2 \begin{pmatrix}C_2-C_1\\C_3-C_1\\C_4-C_1\end{pmatrix}\\
-          \vec{u}_d &= 2 c^2 \begin{pmatrix}t_1-t_2\\t_1-t_3\\t_1-t_4\end{pmatrix}\\
-          \vec{w} &= c^2 \begin{pmatrix}t_2-t_1\\t_3-t_1\\t_4-t_1\end{pmatrix}
-          \end{align}
+          <h3 class="sectiontitle"></h3>
+          <p>We began by applying the Backward Difference Method with Newton's iteration to the Brusselator equation with homogenous Neumann boundary conditions on the square \([0, 40] \times [0, 40]\)</p>
+          <p>The following images show the contour plots for solutions of \(p(x,y)\) at \(t=2000\) with the parameters \(D_p=1\), \(D_q=8\), \(C=4.5\), and \(K=7,8,\ldots,12\).
         </section>
     </div>
-
 
     <!-- jQuery -->
     <script src="//code.jquery.com/jquery.min.js"></script>
