@@ -221,6 +221,28 @@
         </section>
     </div>
     <div class="row">
+      <section>
+        <h3 class="sectiontitle">Excercise 8.4.5</h3>
+        \begin{align}
+        p_t &= D_p * \Delta p + p^2q + C - (K+1)p\\
+        q_t &= D_q\Delta q - p^2q + Kp
+        \end{align}
+        <p>\(p = c\) and \(q = \frac{k}{C}\) are equilibrium points for the equations above.</p>
+        <p>Note \(\Delta p = \frac{\partial^2 p}{\partial x_i^2} = 0\) since p and q are constants.</p>
+        <p>So \begin{align} 0 &= p^2q + C - (K+1)p \\
+              0 &= -p^2q + Kp $$
+              \end{align}
+              <p>Substituting into p and q,</p>
+              \begin{align}
+              0 &= C^2\left(\frac{K}{C}\right) + C - (K+1) C \\
+              0 &= -C^2*\left(\frac{K}{C}\right) + KC
+              \end{align}
+              <p>We verify that $$ CK + C - KC - C = 0$$ and $$ CK + KC = 0$$ concluding that \(q = \frac{K}{C}\) and \(p = C) are equilibrium points.</p>
+              <p>Turing instability occurs when $$ K > \left(\left(1 + C\sqrt{\frac{D_p}{D_q}}\right)^2\right) $$</p>
+              <p>For 8.4.6, when \(D_p = 1, D_q = 8, C = 4.5\), we see that turing instability occurs at \(K > 6.73177\).</p>
+      </section>
+    </div>
+    <div class="row">
         <section>
           <h3 class="sectiontitle">Pattern Formations in the Brusselator</h3>
           <div class="col-md-6">
@@ -261,6 +283,36 @@
         <section>
           <h3 class="sectiontitle">Pattern Formations in the Brusselator</h3>
           <p>Below we have the contour plots for solutions of \(p(x,y,2000)\) for \(D_p = 5\), \(D_q = 6\), \(C = 12\), and \(K = 100, 150, 300\).</p>
+          <div class="col-md-4">
+            <figure class="figure">
+              <video controls autoplay loop width=100%  preload="auto">
+                <source src="Project4/problem8462k100.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </figure>
+          </div>
+          <div class="col-md-4">
+            <figure class="figure">
+              <video controls autoplay loop width=100%  preload="auto">
+                <source src="Project4/problem8462k150.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </figure>
+          </div>
+          <div class="col-md-4">
+            <figure class="figure">
+              <video controls autoplay loop width=100%  preload="auto">
+                <source src="Project4/problem8462k300.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </figure>
+          </div>
+        </section>
+    </div>
+    <div class="row">
+        <section>
+          <h3 class="sectiontitle">Computer Problem 8.4.6</h3>
+          <p>Below we have the contour plots for solutions of \(p(x,y,2000)\) for \(D_p = 1\), \(D_q = 8\), \(C = 4.5\), and \(K = 7.2, 7.4, 7.6\).</p>
           <div class="col-md-4">
             <figure class="figure">
               <video controls autoplay loop width=100%  preload="auto">
