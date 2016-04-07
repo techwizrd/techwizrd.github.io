@@ -152,14 +152,78 @@
         <section>
           <h3 class="sectiontitle">Pattern Formations in the Brusselator</h3>
           <p>We began by applying the Backward Difference Method with Newton's iteration to the Brusselator equation with homogenous Neumann boundary conditions on the square \([0, 40] \times [0, 40]\)</p>
+          <p>\begin{align}
+          p_t &= D_p \Delta p + p^2 q + C - (K + 1) p\\
+          q_t &= D_q \Delta q + p^2 q + K p\\~\\
+          \end{align}
+          \begin{align}
+          \begin{cases}
+          p(x,y,0) &= C + 0.1 &\text{for } 0 \leq x, y \leq 40\\
+          q(x,y,0) &= \frac{K}{C} + 0.2 &\text{for } 0 \leq x, y \leq 40\\
+          u_{\vec{n}} &= 0 &\text{on rectangle boundary, for all } t \geq 0
+          \end{cases}
+          \end{align}</p>
           <p>The following images show the contour plots for solutions of \(p(x,y)\) at \(t=2000\) with the parameters \(D_p=1\), \(D_q=8\), \(C=4.5\), and \(K=7,8,\ldots,12\).
+            <div class="col-md-6">
+              <figure class="figure">
+                <video controls autoplay loop width=100%  preload="auto">
+                  <source src="Project4/example815k7.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+                <figcaption class="figure-caption">\(K=7\)</figcaption>
+              </figure>
+            </div>
+            <div class="col-md-6">
+              <figure class="figure">
+                <video controls autoplay loop width=100%  preload="auto">
+                  <source src="Project4/example815k8.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+                <figcaption class="figure-caption">\(K=8\)</figcaption>
+              </figure>
+            </div>
+            <div class="col-md-6">
+              <figure class="figure">
+                <video controls autoplay loop width=100%  preload="auto">
+                  <source src="Project4/example815k9.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+                <figcaption class="figure-caption">\(K=9\)</figcaption>
+              </figure>
+            </div>
+            <div class="col-md-6">
+              <figure class="figure">
+                <video controls autoplay loop width=100%  preload="auto">
+                  <source src="Project4/example815k10.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+                <figcaption class="figure-caption">\(K=10\)</figcaption>
+              </figure>
+            </div>
+            <div class="col-md-6">
+              <figure class="figure">
+                <video controls autoplay loop width=100%  preload="auto">
+                  <source src="Project4/example815k11.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+                <figcaption class="figure-caption">\(K=11\)</figcaption>
+              </figure>
+            </div>
+            <div class="col-md-6">
+              <figure class="figure">
+                <video controls autoplay loop width=100%  preload="auto">
+                  <source src="Project4/example815k12.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+                <figcaption class="figure-caption">\(K=12\)</figcaption>
+              </figure>
+            </div>
         </section>
     </div>
     <div class="row">
         <section>
-          <h3 class="sectiontitle"></h3>
-          <p>We began by applying the Backward Difference Method with Newton's iteration to the Brusselator equation with homogenous Neumann boundary conditions on the square \([0, 40] \times [0, 40]\)</p>
-          <p>The following images show the contour plots for solutions of \(p(x,y)\) at \(t=2000\) with the parameters \(D_p=1\), \(D_q=8\), \(C=4.5\), and \(K=7,8,\ldots,12\).
+          <h3 class="sectiontitle">Pattern Formations in the Brusselator</h3>
+          <p></p>
         </section>
     </div>
 
