@@ -247,7 +247,7 @@ $$ q + (1-q) = 1.$$ Therefore \(G\) is stochastic.</p>
           <p>Solving for the probability vector \(p\) yielded the following.</p>
 \[ p = \left[ \begin{array}{c}
 \end{array} \right]\] 
-          <p>We then changed the jump probability to \(q=0\) as before yielding the following probability vector \(p\). The probability becomes lost in pages 2 and 4 which are a closed loop to one another. There is a 50\% chance of being in either one.</p>
+          <p>We then changed the jump probability to \(q=0\) as before yielding the following probability vector \(p\). The probability becomes lost in pages 2 and 4 which are a closed loop to one another. There is a 50% chance of being in either one.</p>
 \[ p = \left[ \begin{array}{c}
 \end{array} \right]\] 
           <p>Increasing the jump probability \(q\) to 50% drops the probabilities of the highest ranked pages by 50% and doubles the probability of the other pages.</p>
@@ -274,6 +274,7 @@ $$ q + (1-q) = 1.$$ Therefore \(G\) is stochastic.</p>
 1 & 0 & 0 & 0 & 0 & 0
 \end{array} \right]\]
           <p>As a result of deleting page 1, page 3 goes up in ranking while page 7 gains in probability but decreases in rank. Everything other page has a slight, ~2% decrease in rank but maintains the same order.</p>
+          <p>The code for this new network can be found at <a href="proj6/Project6runner2.m">Project6runner2.m</a>. It uses the same <a href="proj6/SearchEngine.m">SearchEngine.m</a> code we wrote earlier to compute the probability vector \(p\).</p>
         </section>
     </div>
 
