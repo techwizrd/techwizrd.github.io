@@ -209,9 +209,39 @@ $$ q + (1-q) = 1.$$ Therefore \(G\) is stochastic.</p>
         <section>
           <p>One very interesting feature of page rank is the jump probability \(q\). This parameter was added by Sergey Brin and Larry Page in 1998 to solve the getting stuck in loops and other structures of the network. The jump probability is the probability that we will jump to a random page in the matrix. Typically, the jump probability \(q=0.15\). In order to examine this, we set the jump probability \(q=0\) yielding the following probability vector \(p\). This shows us what would happen if there was no jump probability (and the results \(q\) was meant to fix).</p>
 \[ p = \left[ \begin{array}{c}
+3.0000 & 0.0116\\
+2.0000 & 0.0116\\
+1.0000 & 0.0154\\
+4.0000 & 0.0154\\
+5.0000 & 0.0309\\
+7.0000 & 0.0309\\
+6.0000 & 0.0309\\
+8.0000 & 0.0309\\
+9.0000 & 0.0811\\
+12.0000 & 0.0811\\
+10.0000 & 0.1100\\
+11.0000 & 0.1100\\
+15.0000 & 0.1467\\
+13.0000 & 0.1467\\
+14.0000 & 0.1467\\
 \end{array} \right]\] 
           <p>We also set the probability \(q=0.5\) to see what would happen with a much higher jump probability. This yield the following probability vector \(p\).</p>
-\[ p = \left[ \begin{array}{c}
+\[ p = \left[ \begin{array}{cc}
+1.0000 & 0.0467\\
+4.0000 & 0.0467\\
+5.0000 & 0.0536\\
+7.0000 & 0.0536\\
+8.0000 & 0.0536\\
+6.0000 & 0.0536\\
+2.0000 & 0.0540\\
+3.0000 & 0.0540\\
+9.0000 & 0.0676\\
+12.0000 & 0.0676\\
+14.0000 & 0.0786\\
+13.0000 & 0.0905\\
+15.0000 & 0.0905\\
+10.0000 & 0.0946\\
+11.0000 & 0.0946\\
 \end{array} \right]\] 
         </section>
     </div>
@@ -220,6 +250,21 @@ $$ q + (1-q) = 1.$$ Therefore \(G\) is stochastic.</p>
         <section>
           <p>If we look at the adjacency matrix from earlier, we notice that each entry \(A_{ij}\) in the matrix only contains a \(0\) or \(1\) representing whether the page \(i\) contains link to page \(j\). What if a page contained more than one link to another page? We decided to model this by replacing the page ranks of \(A_{27}) and \(A_{12,7}\) by 2 in the adjacency matrix \(A\). Now, converting our matrix \(G\) solving for the probability vector \(p\) results in the following.</p>
 \[ p = \left[ \begin{array}{c}
+1.0000 & 0.0247\\
+4.0000 & 0.0284\\
+7.0000 & 0.0331\\
+5.0000 & 0.0347\\
+2.0000 & 0.0351\\
+8.0000 & 0.0434\\
+6.0000 & 0.0450\\
+3.0000 & 0.0514\\
+12.0000 & 0.0664\\
+9.0000 & 0.0721\\
+10.0000 & 0.1026\\
+11.0000 & 0.1046\\
+14.0000 & 0.1139\\
+13.0000 & 0.1214\\
+15.0000 & 0.1231\\
 \end{array} \right]\] 
         </section>
     </div>
@@ -228,6 +273,20 @@ $$ q + (1-q) = 1.$$ Therefore \(G\) is stochastic.</p>
         <section>
           <p>The internet changes quite fast. New websites are being created every day, and older websites will sometimes disappear and go offline. What happens to the network if a website disappears? To test this, we removed page 10 from the network by setting all links to and from page 10 to 0 in the adjacency matrix. This yielded the following probability vector \(p\).</p>
 \[ p = \left[ \begin{array}{c}
+5.0000 & 0.0321\\
+4.0000 & 0.0359\\
+3.0000 & 0.0409\\
+13.0000 & 0.0412\\
+7.0000 & 0.0414\\
+6.0000 & 0.0428\\
+2.0000 & 0.0471\\
+10.0000 & 0.0482\\
+9.0000 & 0.0502\\
+8.0000 & 0.0517\\
+12.0000 & 0.1036\\
+14.0000 & 0.1075\\
+11.0000 & 0.1710\\
+15.0000 & 0.1865
 \end{array} \right]\] 
         </section>
     </div>
@@ -245,13 +304,34 @@ $$ q + (1-q) = 1.$$ Therefore \(G\) is stochastic.</p>
 0 & 1 & 0 & 0 & 0 & 0 & 0
 \end{array} \right]\] 
           <p>Solving for the probability vector \(p\) yielded the following.</p>
-\[ p = \left[ \begin{array}{c}
+\[ p = \left[ \begin{array}{cc}
+3.0000 & 0.0358\\
+7.0000 & 0.0472\\
+6.0000 & 0.0508\\
+1.0000 & 0.0538\\
+5.0000 & 0.0633\\
+4.0000 & 0.3558\\
+2.0000 & 0.3933
 \end{array} \right]\] 
           <p>We then changed the jump probability to \(q=0\) as before yielding the following probability vector \(p\). The probability becomes lost in pages 2 and 4 which are a closed loop to one another. There is a 50% chance of being in either one.</p>
-\[ p = \left[ \begin{array}{c}
+\[ p = \left[ \begin{array}{cc}
+3.0000 & 0.0000\\
+5.0000 & 0.0000\\
+7.0000 & 0.0000\\
+6.0000 & 0.0000\\
+1.0000 & 0.0000\\
+4.0000 & 0.5000\\
+2.0000 & 0.5000
 \end{array} \right]\] 
           <p>Increasing the jump probability \(q\) to 50% drops the probabilities of the highest ranked pages by 50% and doubles the probability of the other pages.</p>
-\[ p = \left[ \begin{array}{c}
+\[ p = \left[ \begin{array}{cc}
+3.0000 & 0.0893\\
+7.0000 & 0.1031\\
+6.0000 & 0.1069\\
+1.0000 & 0.1109\\
+5.0000 & 0.1299\\
+4.0000 & 0.2009\\
+2.0000 & 0.2590
 \end{array} \right]\]
           <p>Suppose page 3 would like to improve its page rank and beat its competitor page 7. It persuades pages 2 and 4 to display its link. This results in the following adjacency matrix.</p>
 \[ A = \left[ \begin{array}{ccccccc}
@@ -264,6 +344,15 @@ $$ q + (1-q) = 1.$$ Therefore \(G\) is stochastic.</p>
 0 & 1 & 0 & 0 & 0 & 0 & 0
 \end{array} \right]\]
           <p>As a result of this change, page 3 moves right on up in the world taking rank 3 and pushing down page 4. Page 5 also moves up from rank 3 to rank 2.</p>
+\[ p = \left[ \begin{array}{cc}
+7.0000 & 0.0734\\
+6.0000 & 0.1023\\
+1.0000 & 0.1083\\
+4.0000 & 0.1116\\
+3.0000 & 0.1880\\
+5.0000 & 0.2042\\
+2.0000 & 0.2121
+\end{array} \right]\]
           <p>We will now study the effects of removing page 1 from the rankings. This yields the following adjacency matrix.</p>
 \[ A = \left[ \begin{array}{ccccccc}
 0 & 0 & 1 & 0 & 0 & 0\\
@@ -274,6 +363,14 @@ $$ q + (1-q) = 1.$$ Therefore \(G\) is stochastic.</p>
 1 & 0 & 0 & 0 & 0 & 0
 \end{array} \right]\]
           <p>As a result of deleting page 1, page 3 goes up in ranking while page 7 gains in probability but decreases in rank. Everything other page has a slight, ~2% decrease in rank but maintains the same order.</p>
+\[ p = \left[ \begin{array}{cc}
+7.0000 & 0.0474\\
+3.0000 & 0.0474\\
+6.0000 & 0.0528\\
+5.0000 & 0.0653\\
+4.0000 & 0.3752\\
+2.0000 & 0.4119
+\end{array} \right]\]
           <p>The code for this new network can be found at <a href="proj6/Project6runner2.m">Project6runner2.m</a>. It uses the same <a href="proj6/SearchEngine.m">SearchEngine.m</a> code we wrote earlier to compute the probability vector \(p\).</p>
         </section>
     </div>
