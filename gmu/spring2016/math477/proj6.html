@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Kunal Sarkhel</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <!-- Custom Fonts -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <style type="text/css">
+        body {
+            background: white;
+            color: #2f4f4f;
+            font-family: Georgia, "Times New Roman", Times, serif;
+            padding-top: 25px;
+            width: 500px;
+            margin: 0 auto;
+            line-height: 1em;
+        }
+
+        a {
+            color: #203737;
+        }
+
+        a:hover {
+            color: #bca474;
+        }
+
+        #ktitle {
+            line-height: 1.15em;
+        }
+
+        #ktitle>h1 {
+            font-size: 60px;
+            line-height: 1.15em;
+            font-style: italic;
+            letter-spacing: -2px;
+            font-weight: bold;
+        }
+
+        #ktitle>hr {
+            color: transparent;
+            background-color: transparent;
+            height: 4px;
+            border-top: 1px solid #2f4f4f;
+            border-bottom: 1px solid #2f4f4f;
+        }
+
+        section>p {
+            text-align: left;
+            line-height: 1.5em;
+            font-size: 16px;
+        }
+
+        section>div {
+            text-align: left;
+            line-height: 1.5em;
+            font-size: 16px;
+        }
+
+        .row {
+            display: block;
+            margin-left: 0;
+        }
+
+        footer>p {
+            line-height: 1em;
+            font-size: 12px;
+        }
+
+        h3.sectiontitle {
+            text-align: left;
+            font-style: italic;
+        }
+
+        #menu ul {
+            list-style-type: none;
+        }
+
+        #menu ul li {
+            display: inline;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        p.lefta {
+            text-align: left;
+            font-size: 16px;
+            line-height: 1.15em;
+        }
+
+        section#tutoring {
+            font-size: 16px;
+        }
+
+        section#tutoring>div>ul>div>p {
+            font-size: 16px;
+            margin-top: 0.5em;
+            margin-left: 1em;
+            margin-bottom: 0.5em;
+        }
+
+        p>tt {
+            font-size: 14px;
+            font-family: monospace;
+        }
+        section>p {
+          text-align: justify;
+        }
+        p>img {
+          width: 100%;
+        }
+    </style>
+
+    <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+</head>
+
+<body>
+
+    <div id="ktitle" class="text-center">
+        <h1 class="page-lead">kunal sarkhel</h1>
+        <hr>
+        <ul class="breadcrumb">
+          <li><a href="/">Home</a></li>
+          <li><a href="#">gmu</a></li>
+          <li><a href="#">Spring 2016</a></li>
+          <li><a href="/gmu/spring2016/math477/">MATH 477</a></li>
+          <li><a class="active">Project 6</a></li>
+        </ul>
+    </div>
+    <h3 class="sectiontitle">Page Rank</h3>
+
+
+    <div class="row">
+        <section id="intro">
+          <p>For <a href="http://math.gmu.edu/~tsauer/class/447/proj/447proj6.html">Project 6</a>, Garrett Lee, Aneesh Malhotra, Lucas Bouck, and I implemented a version of the <a href="http://math.gmu.edu/~tsauer/class/447/proj/chap12.pdf">page rank</a> algorithm made famous by the Google search engine.</p>
+        </section>
+    </div>
+    <div class="row">
+        <h3 class="sectiontitle">Google matrix \(G\) is a stochastic matrix</h3>
+        <section>
+<p> We will show that \(G\) is a stochastic matrix given that for all \(j\) 
+
+\begin{align}
+&\sum_{n=1}^{n} \frac{q}{n} + \frac{A_{ij}(1-q)}{n_j}s\\
+&= q + \sum_{i=1}^{n} \frac{A_{ij}(1-q)}{n_j}\\
+&= q +  n_j\frac{(1-q)}{n_j}\\
+\end{align}
+<p>Since \(\sum_{i=1}^{n} A_{ij} = n_j\), we see that we are left with
+$$ q + (1-q) = 1.$$ Therefore \(G\) is stochastic.</p>
+        </section>
+    </div>
+    <div>
+        <h3 class="sectiontitle">Verifying the dominant eigenvector \(p\)</h3>
+        <section>
+          <p>We were asked to construct the matrix \(G\) for the given network. We did this by first constructing the adjacency matrix \(A\) for the network.</p>
+\[ A = \left[ \begin{array}{ccccccccccccccc}
+0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+0 & 1 & 0 & 0 & 0 & 1 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0\\
+1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 1 & 1 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1\\
+0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 0 & 0 & 1 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 1 & 0\\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 0 & 1 & 0 & 1\\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 1 & 0
+\end{array} \right]\] 
+          <p>After constructing the adjacency matrix \(A\), we computed the Google matrix \(G\) by setting each \(ij\) entry of the matrix to $$\frac{q}{n} - A_{ji}\frac{1-q}{n_j}$$ where \(q\) is the jump probability, \(n\) is the number of pages, and \(n_j\) is the sum of row \(j\) of \(A\) (i.e., the number of links on page \(j\)). Once we computed the \(G\) matrix, we then computed the solved the following equation to find \(p\), the vector of probabilities of being at each page in the network. $$p = G p$$</p>
+          <p>This yield the following probability vector \(p\) as expected.</p>
+\[ p = \left[ \begin{array}{c}
+0.0268\\
+0.0299\\
+0.0299\\
+0.0268\\
+0.0396\\
+0.0396\\
+0.0396\\
+0.0396\\
+0.0746\\
+0.1063\\
+0.1063\\
+0.0746\\
+0.1251\\
+0.1163\\
+0.1251\\
+\end{array} \right]\] 
+          <p>You can verify this using our MATLAB code: <a href="proj6/project6runner.m">project6runner.m</a> and <a href="proj6/SearchEngine.m">SearchEngine.m</a>.</p>
+        </section>
+    </div>
+    <div>
+        <h3 class="sectiontitle">Examining the Jump Probability</h3>
+        <section>
+          <p>One very interesting feature of page rank is the jump probability \(q\). This parameter was added by Sergey Brin and Larry Page in 1998 to solve the getting stuck in loops and other structures of the network. The jump probability is the probability that we will jump to a random page in the matrix. Typically, the jump probability \(q=0.15\). In order to examine this, we set the jump probability \(q=0\) yielding the following probability vector \(p\). This shows us what would happen if there was no jump probability (and the results \(q\) was meant to fix).</p>
+\[ p = \left[ \begin{array}{c}
+\end{array} \right]\] 
+          <p>We also set the probability \(q=0.5\) to see what would happen with a much higher jump probability. This yield the following probability vector \(p\).</p>
+\[ p = \left[ \begin{array}{c}
+\end{array} \right]\] 
+        </section>
+    </div>
+    <div>
+        <h3 class="sectiontitle">Improving Page Ranks</h3>
+        <section>
+          <p>If we look at the adjacency matrix from earlier, we notice that each entry \(A_{ij}\) in the matrix only contains a \(0\) or \(1\) representing whether the page \(i\) contains link to page \(j\). What if a page contained more than one link to another page? We decided to model this by replacing the page ranks of \(A_{27}) and \(A_{12,7}\) by 2 in the adjacency matrix \(A\). Now, converting our matrix \(G\) solving for the probability vector \(p\) results in the following.</p>
+\[ p = \left[ \begin{array}{c}
+\end{array} \right]\] 
+        </section>
+    </div>
+    <div>
+        <h3 class="sectiontitle">Removing Pages</h3>
+        <section>
+          <p>The internet changes quite fast. New websites are being created every day, and older websites will sometimes disappear and go offline. What happens to the network if a website disappears? To test this, we removed page 10 from the network by setting all links to and from page 10 to 0 in the adjacency matrix. This yielded the following probability vector \(p\).</p>
+\[ p = \left[ \begin{array}{c}
+\end{array} \right]\] 
+        </section>
+    </div>
+    <div>
+        <h3 class="sectiontitle">Another Network</h3>
+        <section>
+          <p>After conducting the previous tests, we wanted to test a new network. We constructed the following network and adjacency matrix \(A\).<p>
+\[ A = \left[ \begin{array}{ccccccc}
+0 & 1 & 0 & 0 & 1 & 1 & 1\\
+0 & 0 & 0 & 1 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 1 & 0 & 0\\
+0 & 1 & 0 & 0 & 0 & 0 & 0\\
+1 & 1 & 0 & 0 & 0 & 1 & 0\\
+1 & 0 & 1 & 0 & 0 & 0 & 1\\
+0 & 1 & 0 & 0 & 0 & 0 & 0
+\end{array} \right]\] 
+          <p>Solving for the probability vector \(p\) yielded the following.</p>
+\[ p = \left[ \begin{array}{c}
+\end{array} \right]\] 
+          <p>We then changed the jump probability to \(q=0\) as before yielding the following probability vector \(p\). The probability becomes lost in pages 2 and 4 which are a closed loop to one another. There is a 50\% chance of being in either one.</p>
+\[ p = \left[ \begin{array}{c}
+\end{array} \right]\] 
+          <p>Increasing the jump probability \(q\) to 50% drops the probabilities of the highest ranked pages by 50% and doubles the probability of the other pages.</p>
+\[ p = \left[ \begin{array}{c}
+\end{array} \right]\]
+          <p>Suppose page 3 would like to improve its page rank and beat its competitor page 7. It persuades pages 2 and 4 to display its link. This results in the following adjacency matrix.</p>
+\[ A = \left[ \begin{array}{ccccccc}
+0 & 1 & 0 & 0 & 1 & 1 & 1\\
+0 & 0 & 1 & 1 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 1 & 0 & 0\\
+0 & 1 & 1 & 0 & 0 & 0 & 0\\
+1 & 1 & 0 & 0 & 0 & 1 & 0\\
+1 & 0 & 1 & 0 & 0 & 0 & 1\\
+0 & 1 & 0 & 0 & 0 & 0 & 0
+\end{array} \right]\]
+          <p>As a result of this change, page 3 moves right on up in the world taking rank 3 and pushing down page 4. Page 5 also moves up from rank 3 to rank 2.</p>
+          <p>We will now study the effects of removing page 1 from the rankings. This yields the following adjacency matrix.</p>
+\[ A = \left[ \begin{array}{ccccccc}
+0 & 0 & 1 & 0 & 0 & 0\\
+0 & 0 & 0 & 1 & 0 & 0\\
+1 & 0 & 0 & 0 & 0 & 0\\
+1 & 0 & 0 & 0 & 1 & 0\\
+0 & 1 & 0 & 0 & 0 & 1\\
+1 & 0 & 0 & 0 & 0 & 0
+\end{array} \right]\]
+          <p>As a result of deleting page 1, page 3 goes up in ranking while page 7 gains in probability but decreases in rank. Everything other page has a slight, ~2% decrease in rank but maintains the same order.</p>
+        </section>
+    </div>
+
+
+    <!-- jQuery -->
+    <script src="//code.jquery.com/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
+
+</html>
