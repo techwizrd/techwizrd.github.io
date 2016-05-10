@@ -1,0 +1,67 @@
+%% Chapter 11.2.2: Image Compression
+% We begin by loading a m x n x 3 matrix of RGB color using imread. Before
+% we continue, we'd like to convert our matrix to grayscale. A common
+% method of doing this mentioned in the text is to use the following
+% formula
+%                   X = 0.2126 R + 0.7152 G + 0.0722 B              (11.15)
+% Note that the constants are doubles, so we need to convert MATLAB's
+% default datataype uint8 to a double for computation. After we use the
+% equation to convert to grayscale, then we should convert back to uint8
+% for displaying the image
+x = imread('Lenna.png');
+x = double(x);
+r = x(:,:,1); g=x(:,:,2); b=x(:,:,3);
+xgray = 0.2126*r +0.7512*g+0.0722*b;  
+xgray=uint8(xgray);
+imagesc(xgray); colormap(gray)
+imwrite(xgray, 'Lenna-grayscale.png');
+%%  11.2 Problem 3
+% In the previous section we read an RGB image into a matrix and converted
+% it to a grayscale image. Now, let us crop the resultant grayscale matrix
+% to a multiple of 8.
+n = min(size(xgray));
+n = n - mod(n, 8);
+xcrop = xgray(1:n,1:n);
+%% 11.2 Problem 3 (a)
+% Extract an 8 x 8 pixel block. Display the block with the imagesc command.
+xb = xcrop(1:8,1:8);
+imagesc(xb); colormap(gray)
+%% 11.2 Problem 3 (b)
+% Apply the 2D-DCT
+imwrite(xb, 'original-block.png');
+[Yq1,Xf1] = quantize(xb, dct(double(xb)), 1)
+imagesc(Xf1); title('Block (colormap(gray);
+imwrite(Xf1, 'block-p1.png');
+[Yq2,Xf2] = quantize(xb, dct(double(xb)), 2)
+imwrite(Xf1, 'block-p2.png');
+[Yq4,Xf4] = quantize(xb, dct(double(xb)), 4)
+imwrite(Xf1, 'block-p4.png');
+%% 11.2 Problem 3 (c)
+xnew = compress(xcrop, 1);
+imwrite(xnew, 'grayscale-p1.png');
+xnew = compress(xcrop, 2);
+imwrite(xnew, 'grayscale-p2.png');
+xnew = compress(xcrop, 4);
+imwrite(xnew, 'grayscale-p4.png');
+xnew = compress(xcrop, 8);
+imwrite(xnew, 'grayscale-p8.png');
+xnew = compress(xcrop, 16);
+imwrite(xnew, 'grayscale-p16.png');
+xnew = compress(xcrop, 32);
+imwrite(xnew, 'grayscale-p32.png');
+xnew = compress(xcrop, 64);
+imwrite(xnew, 'grayscale-p64.png');
+xnew = compress(xcrop, 128);
+imwrite(xnew, 'grayscale-p128.png');
+xnew = compress(xcrop, 256);
+imwrite(xnew, 'grayscale-p256.png');
+%%
+% Note: these become all gray when p gets high enough because we are trying
+% to get matrices of all 0s for our Huffman encoding (so that we can just
+% say that there will be 20 zeros ahead). We add back 128 during the
+% dequantization and inverse transform process, and this results in the
+% gray color. 0 is black, 255 is white, and as the value 128 is right in
+% between the two, 128 represents gray.
+%%
+% I should do this for the image from p=1 to p=100 and animate in between
+% them

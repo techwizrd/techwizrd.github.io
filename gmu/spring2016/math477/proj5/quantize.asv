@@ -1,0 +1,18 @@
+
+function [Yq, Xf] = quantize(X, C, p)
+% QUANTIZE  Quantize a matrix
+%   Carry out the conversion, centering, transforming, and quantization of
+%   a square n x n matrix X. Denote by C the n x n Discrete Cosine
+%   Transform (DCT) matrix. p is the loss parameter.
+%
+%   The return value Yq is matrix representing the new quantized version of
+%   the image.
+Xd=double(X);
+Xc=Xd-128;
+Y=dct(Xc');
+Q=p*8./hilb(8);
+Yq=round(Y./Q);
+Ydq=Yq.*Q;
+Xdq=C'*Ydq*C;
+Xe=
+end

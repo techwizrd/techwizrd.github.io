@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Kunal Sarkhel</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <!-- Custom Fonts -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <style type="text/css">
+        body {
+            background: white;
+            color: #2f4f4f;
+            font-family: Georgia, "Times New Roman", Times, serif;
+            padding-top: 25px;
+            width: 500px;
+            margin: 0 auto;
+            line-height: 1em;
+        }
+
+        a {
+            color: #203737;
+        }
+
+        a:hover {
+            color: #bca474;
+        }
+
+        #ktitle {
+            line-height: 1.15em;
+        }
+
+        #ktitle>h1 {
+            font-size: 60px;
+            line-height: 1.15em;
+            font-style: italic;
+            letter-spacing: -2px;
+            font-weight: bold;
+        }
+
+        #ktitle>hr {
+            color: transparent;
+            background-color: transparent;
+            height: 4px;
+            border-top: 1px solid #2f4f4f;
+            border-bottom: 1px solid #2f4f4f;
+        }
+
+        section>p {
+            text-align: left;
+            line-height: 1.5em;
+            font-size: 16px;
+        }
+
+        section>div {
+            text-align: left;
+            line-height: 1.5em;
+            font-size: 16px;
+        }
+
+        .row {
+            display: block;
+            margin-left: 0;
+        }
+
+        footer>p {
+            line-height: 1em;
+            font-size: 12px;
+        }
+
+        h3.sectiontitle {
+            text-align: left;
+            font-style: italic;
+        }
+
+        #menu ul {
+            list-style-type: none;
+        }
+
+        #menu ul li {
+            display: inline;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        p.lefta {
+            text-align: left;
+            font-size: 16px;
+            line-height: 1.15em;
+        }
+
+        section#tutoring {
+            font-size: 16px;
+        }
+
+        section#tutoring>div>ul>div>p {
+            font-size: 16px;
+            margin-top: 0.5em;
+            margin-left: 1em;
+            margin-bottom: 0.5em;
+        }
+
+        p>tt {
+            font-size: 14px;
+            font-family: monospace;
+        }
+        section>p {
+          text-align: justify;
+        }
+        p>img {
+          width: 100%;
+        }
+    </style>
+
+    <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+</head>
+
+<body>
+
+    <div id="ktitle" class="text-center">
+        <h1 class="page-lead">kunal sarkhel</h1>
+        <hr>
+        <ul class="breadcrumb">
+          <li><a href="/">Home</a></li>
+          <li><a href="#">gmu</a></li>
+          <li><a href="#">Spring 2016</a></li>
+          <li><a href="/gmu/spring2016/math477/">MATH 477</a></li>
+          <li><a class="active">Project 5</a></li>
+        </ul>
+    </div>
+    <h3 class="sectiontitle">Image Compression</h3>
+
+
+    <div class="row">
+        <section id="intro">
+          <p>For <a href="http://math.gmu.edu/~tsauer/class/447/proj/447proj5.html">Project 5</a>, I chose to implement <a href="http://math.gmu.edu/~tsauer/class/447/proj/chap11.pdf">image compression</a>.</p>
+        </section>
+    </div>
+    <div class="row">
+        <h3 class="sectiontitle">Compression in Grayscale</h3>
+        <section>
+        <p>We will start by reading in the following well-known test image of Lena Söderberg. We'll convert it to grayscale to make our initial work easier.</p>
+        <div class="col-xs-6 col-md-6">
+          <img class="img-responsive thumbnail" src="proj5/Lenna.png">
+          <section>
+        </div>
+        <div class="col-xs-6 col-md-6">
+          <img class="img-responsive thumbnail" src="proj5/Lenna-grayscale.png">
+          <section>
+        </div>
+        <p>We will take the first \(8 \times 8\) pixel block in the image and apply a 2D Discrete Cosine Transform (DCT) with \(p=1\), \(p=2\), and \(p=4\). Below, we have the original pixel block.</p>
+\[ \left[ \begin{array}{ccc}
+160 & 160 & 160 & 159 & 160 & 153 & 161 & 158\\
+160 & 160 & 160 & 159 & 160 & 153 & 161 & 158\\
+160 & 160 & 160 & 159 & 160 & 153 & 161 & 158\\
+160 & 160 & 160 & 159 & 160 & 153 & 161 & 158\\
+160 & 160 & 160 & 159 & 160 & 153 & 161 & 158\\
+162 & 162 & 155 & 153 & 159 & 157 & 156 & 157\\
+158 & 158 & 162 & 156 & 158 & 160 & 156 & 152\\
+156 & 156 & 153 & 154 & 155 & 156 & 153 & 155
+\end{array} \right]\] 
+<p>Below is the \(Y_Q\) matrix for \(p=1\).</p>
+\[ Y_Q = \left[ \begin{array}{ccc}
+11 &  5 &  4 &  3 &  2 &  2 &  1 &  1\\
+0 &  0 &  0 &  0 &  0 &  0 &  0 &  0\\
+0 &  0 &  0 &  0 &  0 &  0 &  0 &  0\\
+0 &  0 &  0 &  0 &  0 &  0 &  0 &  0\\
+0 &  0 &  0 &  0 &  0 &  0 &  0 &  0\\
+0 &  0 &  0 &  0 &  0 &  0 &  0 &  0\\
+0 &  0 &  0 &  0 &  0 &  0 &  0 &  0\\
+0 &  0 &  0 &  0 &  0 &  0 &  0 &  0
+\end{array} \right]\] 
+<p>Below is the \(Y_Q\) matrix for \(p=1\).</p>
+\[ Y_Q = \left[ \begin{array}{ccc}
+5 &  3 &  2 &  1 &  1 &  1 &  1 &  1\\
+0 &  0 &  0 &  0 &  0 &  0 &  0 &  0\\
+0 &  0 &  0 &  0 &  0 &  0 &  0 &  0\\
+0 &  0 &  0 &  0 &  0 &  0 &  0 &  0\\
+0 &  0 &  0 &  0 &  0 &  0 &  0 &  0\\
+0 &  0 &  0 &  0 &  0 &  0 &  0 &  0\\
+0 &  0 &  0 &  0 &  0 &  0 &  0 &  0\\
+0 &  0 &  0 &  0 &  0 &  0 &  0 &  0
+\end{array} \right]\] 
+<p>Below is the \(Y_Q\) matrix for \(p=1\).</p>
+\[ Y_Q = \left[ \begin{array}{ccc}
+3 &  1 &  1 &  1 &  1 &  0 &  0 &  0\\
+0 &  0 &  0 &  0 &  0 &  0 &  0 &  0\\
+0 &  0 &  0 &  0 &  0 &  0 &  0 &  0\\
+0 &  0 &  0 &  0 &  0 &  0 &  0 &  0\\
+0 &  0 &  0 &  0 &  0 &  0 &  0 &  0\\
+0 &  0 &  0 &  0 &  0 &  0 &  0 &  0\\
+0 &  0 &  0 &  0 &  0 &  0 &  0 &  0\\
+0 &  0 &  0 &  0 &  0 &  0 &  0 &  0
+\end{array} \right]\] 
+        </section>
+        <p>Dequantization results in the following images for each block.</p>
+        <div class="col-md-4">
+          <figure class="figure">
+            <img src="proj5/block-p1.png" class="figure-img img-responsive img-rounded">
+            <figcaption class="figure-caption">\(p=1\)</figcaption>
+          </figure>
+        </div>
+        <div class="col-md-4">
+          <figure class="figure">
+            <img src="proj5/block-p2.png" class="figure-img img-responsive img-rounded">
+            <figcaption class="figure-caption">\(p=2\)</figcaption>
+          </figure>
+        </div>
+        <div class="col-md-4">
+          <figure class="figure">
+            <img src="proj5/block-p4.png" class="figure-img img-responsive img-rounded">
+            <figcaption class="figure-caption">\(p=4\)</figcaption>
+          </figure>
+        </div>
+        <p>Applying this compression to every \(8 \times 8\) block in the image results in the following images.</p>
+        <div class="col-md-4">
+          <figure class="figure">
+            <img src="proj5/grayscale-p1.png" class="figure-img img-responsive img-rounded">
+            <figcaption class="figure-caption">\(p=1\)</figcaption>
+          </figure>
+        </div>
+        <div class="col-md-4">
+          <figure class="figure">
+            <img src="proj5/grayscale-p2.png" class="figure-img img-responsive img-rounded">
+            <figcaption class="figure-caption">\(p=2\)</figcaption>
+          </figure>
+        </div>
+        <div class="col-md-4">
+          <figure class="figure">
+            <img src="proj5/grayscale-p4.png" class="figure-img img-responsive img-rounded">
+            <figcaption class="figure-caption">\(p=4\)</figcaption>
+          </figure>
+        </div>
+        <p>After using using 1, 2, and 4 as values for \(p\), I decided to try the powers of two up to and including 256.</p>
+        <div class="col-md-4">
+          <figure class="figure">
+            <img src="proj5/grayscale-p8.png" class="figure-img img-responsive img-rounded">
+            <figcaption class="figure-captio1">\(p=8\)</figcaption>
+          </figure>
+        </div>
+        <div class="col-md-4">
+          <figure class="figure">
+            <img src="proj5/grayscale-p16.png" class="figure-img img-responsive img-rounded">
+            <figcaption class="figure-caption">\(p=16\)</figcaption>
+          </figure>
+        </div>
+        <div class="col-md-4">
+          <figure class="figure">
+            <img src="proj5/grayscale-p32.png" class="figure-img img-responsive img-rounded">
+            <figcaption class="figure-caption">\(p=32\)</figcaption>
+          </figure>
+        </div>
+        <div class="col-md-4">
+          <figure class="figure">
+            <img src="proj5/grayscale-p64.png" class="figure-img img-responsive img-rounded">
+            <figcaption class="figure-caption">\(p=64\)</figcaption>
+          </figure>
+        </div>
+        <div class="col-md-4">
+          <figure class="figure">
+            <img src="proj5/grayscale-p128.png" class="figure-img img-responsive img-rounded">
+            <figcaption class="figure-caption">\(p=128\)</figcaption>
+          </figure>
+        </div>
+        <div class="col-md-4">
+          <figure class="figure">
+            <img src="proj5/grayscale-p256.png" class="figure-img img-responsive img-rounded">
+            <figcaption class="figure-caption">\(p=256\)</figcaption>
+          </figure>
+        </div>
+    </div>
+    <div class="row">
+        <h3 class="sectiontitle">JPEG Quantization</h3>
+        <section>
+          <p>We will repeat the previous section, but this time we will use the suggested JPEG Quantization matrix.</p>
+\[Q_y=p\begin{bmatrix}
+              16  &  11  &  10  &  16  &  24   &  40   &  51   &  61 \\
+              12  &  12  &  14  &  19  &  26   &  58   &  60   &  55 \\
+              14  &  13  &  16  &  24  &  40   &  57   &  69   &  56 \\
+              14  &  17  &  22  &  29  &  51   &  87   &  80   &  62 \\
+              18  &  22  &  37  &  56  &  68   &  109  &  103  &  77 \\
+              24  &  35  &  55  &  64  &  81   &  104  &  113  &  92 \\
+              49  &  64  &  78  &  87  &  103  &  121  &  120  &  102 \\
+              72  &  92  &  95  &  98  &  112  &  100  &  103  &  99 
+          \end{bmatrix}.\]</p>
+        <p>Dequantization results in the following images for each block.</p>
+        <div class="col-md-4">
+          <figure class="figure">
+            <img src="proj5/block-jpeg-p1.png" class="figure-img img-responsive img-rounded">
+            <figcaption class="figure-caption">\(p=1\)</figcaption>
+          </figure>
+        </div>
+        <div class="col-md-4">
+          <figure class="figure">
+            <img src="proj5/block-jpeg-p2.png" class="figure-img img-responsive img-rounded">
+            <figcaption class="figure-caption">\(p=2\)</figcaption>
+          </figure>
+        </div>
+        <div class="col-md-4">
+          <figure class="figure">
+            <img src="proj5/block-jpeg-p4.png" class="figure-img img-responsive img-rounded">
+            <figcaption class="figure-caption">\(p=4\)</figcaption>
+          </figure>
+        </div>
+        <p>Applying this compression to every \(8 \times 8\) block in the image results in the following images.</p>
+        <div class="col-md-4">
+          <figure class="figure">
+            <img src="proj5/grayscale-jpeg-p1.png" class="figure-img img-responsive img-rounded">
+            <figcaption class="figure-caption">\(p=1\)</figcaption>
+          </figure>
+        </div>
+        <div class="col-md-4">
+          <figure class="figure">
+            <img src="proj5/grayscale-jpeg-p2.png" class="figure-img img-responsive img-rounded">
+            <figcaption class="figure-caption">\(p=2\)</figcaption>
+          </figure>
+        </div>
+        <div class="col-md-4">
+          <figure class="figure">
+            <img src="proj5/grayscale-jpeg-p4.png" class="figure-img img-responsive img-rounded">
+            <figcaption class="figure-caption">\(p=4\)</figcaption>
+          </figure>
+        </div>
+        <p>After using using 1, 2, and 4 as values for \(p\), I decided to try the powers of two up to and including 256.</p>
+        <div class="col-md-4">
+          <figure class="figure">
+            <img src="proj5/grayscale-jpeg-p8.png" class="figure-img img-responsive img-rounded">
+            <figcaption class="figure-captio1">\(p=8\)</figcaption>
+          </figure>
+        </div>
+        <div class="col-md-4">
+          <figure class="figure">
+            <img src="proj5/grayscale-jpeg-p16.png" class="figure-img img-responsive img-rounded">
+            <figcaption class="figure-caption">\(p=16\)</figcaption>
+          </figure>
+        </div>
+        <div class="col-md-4">
+          <figure class="figure">
+            <img src="proj5/grayscale-jpeg-p32.png" class="figure-img img-responsive img-rounded">
+            <figcaption class="figure-caption">\(p=32\)</figcaption>
+          </figure>
+        </div>
+        <div class="col-md-4">
+          <figure class="figure">
+            <img src="proj5/grayscale-jpeg-p64.png" class="figure-img img-responsive img-rounded">
+            <figcaption class="figure-caption">\(p=64\)</figcaption>
+          </figure>
+        </div>
+        <div class="col-md-4">
+          <figure class="figure">
+            <img src="proj5/grayscale-jpeg-p128.png" class="figure-img img-responsive img-rounded">
+            <figcaption class="figure-caption">\(p=128\)</figcaption>
+          </figure>
+        </div>
+        <div class="col-md-4">
+          <figure class="figure">
+            <img src="proj5/grayscale-jpeg-p256.png" class="figure-img img-responsive img-rounded">
+            <figcaption class="figure-caption">\(p=256\)</figcaption>
+          </figure>
+        </div>
+        </section>
+    </div>
+    <div>
+        <h3 class="sectiontitle">RGB Compression</h3>
+        <section>
+          <p>Next I did RGB compression. I used the same block as before, and applied the JPEQ Quantization to each set of red, green, and blue blocks and then re-combined them.</p>
+          <p>I tried all of the powers of two from \(p=1\) to \(256\).</p>
+          <div class="col-md-4">
+            <figure class="figure">
+              <img src="proj5/rgb-p1.png" class="figure-img img-responsive img-rounded">
+              <figcaption class="figure-caption">\(p=1\)</figcaption>
+            </figure>
+          </div>
+          <div class="col-md-4">
+            <figure class="figure">
+              <img src="proj5/rgb-p2.png" class="figure-img img-responsive img-rounded">
+              <figcaption class="figure-caption">\(p=2\)</figcaption>
+            </figure>
+          </div>
+          <div class="col-md-4">
+            <figure class="figure">
+              <img src="proj5/rgb-p4.png" class="figure-img img-responsive img-rounded">
+              <figcaption class="figure-caption">\(p=4\)</figcaption>
+            </figure>
+          </div>
+          <div class="col-md-4">
+            <figure class="figure">
+              <img src="proj5/rgb-p8.png" class="figure-img img-responsive img-rounded">
+              <figcaption class="figure-captio1">\(p=8\)</figcaption>
+            </figure>
+          </div>
+          <div class="col-md-4">
+            <figure class="figure">
+              <img src="proj5/rgb-p16.png" class="figure-img img-responsive img-rounded">
+              <figcaption class="figure-caption">\(p=16\)</figcaption>
+            </figure>
+          </div>
+          <div class="col-md-4">
+            <figure class="figure">
+              <img src="proj5/rgb-p32.png" class="figure-img img-responsive img-rounded">
+              <figcaption class="figure-caption">\(p=32\)</figcaption>
+            </figure>
+          </div>
+          <div class="col-md-4">
+            <figure class="figure">
+              <img src="proj5/rgb-p64.png" class="figure-img img-responsive img-rounded">
+              <figcaption class="figure-caption">\(p=64\)</figcaption>
+            </figure>
+          </div>
+          <div class="col-md-4">
+            <figure class="figure">
+              <img src="proj5/rgb-p128.png" class="figure-img img-responsive img-rounded">
+              <figcaption class="figure-caption">\(p=128\)</figcaption>
+            </figure>
+          </div>
+          <div class="col-md-4">
+            <figure class="figure">
+              <img src="proj5/rgb-p256.png" class="figure-img img-responsive img-rounded">
+              <figcaption class="figure-caption">\(p=256\)</figcaption>
+            </figure>
+          </div>
+          <p>These become all gray when p gets high enough because we are trying  to get matrices of all zeros for our Huffman encoding (so that we can just say that there will be, say, 20 zeros ahead). We add back 128 during the dequantization and inverse transform process, and this results in the gray color. 0 is black, 255 is white, and as the value 128 is right in  between the two, 128 represents gray.</p>
+        </section>
+    </div>
+    <br />
+    <div>
+        <h3 class="sectiontitle">YUV Compression</h3>
+        <section>
+          <p>Finally, I tested the JPEG compression on the YUV colorspace. The YUV colorspace consists of Y, the luminance or brightness, and U and V which determine the chrominance or color of the picture.</p>
+          <p>Converting to YUV is rather simple, and follows a similar to procedure to the one used to convert to grayscale.</p>
+\begin{align}
+Y &= 0.299  R + 0.587  G + 0.114  B\\
+U &= -0.14713  R - 0.28886  G + 0.436  B\\
+V &= 0.615  R - 0.51499  G - 0.10001  B
+\end{align}
+          <p>We cannot simply display these YUV coordinates, so we have to convert them back to RGB after we do our image compression.</p>
+\begin{align}
+R &= Y + 1.139834576  V\\
+G &= Y -0.3946460533  U -0.58060  V\\
+B &= Y + 2.032111938  U
+\end{align}
+          <p>And this what our images looked like after compression.</p>
+          <div class="col-md-4">
+            <figure class="figure">
+              <img src="proj5/yuv-p1.png" class="figure-img img-responsive img-rounded">
+              <figcaption class="figure-caption">\(p=1\)</figcaption>
+            </figure>
+          </div>
+          <div class="col-md-4">
+            <figure class="figure">
+              <img src="proj5/yuv-p2.png" class="figure-img img-responsive img-rounded">
+              <figcaption class="figure-caption">\(p=2\)</figcaption>
+            </figure>
+          </div>
+          <div class="col-md-4">
+            <figure class="figure">
+              <img src="proj5/yuv-p4.png" class="figure-img img-responsive img-rounded">
+              <figcaption class="figure-caption">\(p=4\)</figcaption>
+            </figure>
+          </div>
+          <div class="col-md-4">
+            <figure class="figure">
+              <img src="proj5/yuv-p8.png" class="figure-img img-responsive img-rounded">
+              <figcaption class="figure-captio1">\(p=8\)</figcaption>
+            </figure>
+          </div>
+          <div class="col-md-4">
+            <figure class="figure">
+              <img src="proj5/yuv-p16.png" class="figure-img img-responsive img-rounded">
+              <figcaption class="figure-caption">\(p=16\)</figcaption>
+            </figure>
+          </div>
+          <div class="col-md-4">
+            <figure class="figure">
+              <img src="proj5/yuv-p32.png" class="figure-img img-responsive img-rounded">
+              <figcaption class="figure-caption">\(p=32\)</figcaption>
+            </figure>
+          </div>
+          <div class="col-md-4">
+            <figure class="figure">
+              <img src="proj5/yuv-p64.png" class="figure-img img-responsive img-rounded">
+              <figcaption class="figure-caption">\(p=64\)</figcaption>
+            </figure>
+          </div>
+          <div class="col-md-4">
+            <figure class="figure">
+              <img src="proj5/yuv-p128.png" class="figure-img img-responsive img-rounded">
+              <figcaption class="figure-caption">\(p=128\)</figcaption>
+            </figure>
+          </div>
+          <div class="col-md-4">
+            <figure class="figure">
+              <img src="proj5/yuv-p256.png" class="figure-img img-responsive img-rounded">
+              <figcaption class="figure-caption">\(p=256\)</figcaption>
+            </figure>
+          </div>
+          <p>As with the previous section, these pictures turn pink as we increase the loss parameter because we are trying to create matrices of all zeros for our Huffman encoding. Adding 128 to each \(Y\), \(U\), and \(V\) coordinate and then converting back to our RGB coordinates results in the pink color.</p>
+        </section>
+    </div>
+
+    <!-- jQuery -->
+    <script src="//code.jquery.com/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
+
+</html>
